@@ -40,27 +40,27 @@ export class AppComponent implements OnInit {
     this.bounceIn = false;
     this._apiService.getUinames()
       .subscribe((data: any) => {
+        this.uinames = {
+          name: data.name,
+          surname: data.surname,
+          gender: data.gender,
+          region: data.region,
+          age: data.age,
+          title: data.title,
+          phone: data.phone,
+          birthday: {
+            dmy: data.birthday.dmy,
+            mdy: data.birthday.mdy,
+            raw: data.birthday.raw
+          },
+          email: data.email,
+          password: data.password,
+          photo: data.photo
+        }
         setTimeout(() => {
-          this.uinames = {
-            name: data.name,
-            surname: data.surname,
-            gender: data.gender,
-            region: data.region,
-            age: data.age,
-            title: data.title,
-            phone: data.phone,
-            birthday: {
-              dmy: data.birthday.dmy,
-              mdy: data.birthday.mdy,
-              raw: data.birthday.raw
-            },
-            email: data.email,
-            password: data.password,
-            photo: data.photo
-          }
           this.bounceIn = true;
+          this.space = true;
         }, 500);
-        this.space = true;
       }, err => console.log(err));
   }
 
@@ -69,6 +69,10 @@ export class AppComponent implements OnInit {
     if (keyCode.code == 'Space') {
       this.petition()
     }
+  }
+
+  close() {
+    this.space = false;
   }
 }
 
